@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.8",
     "generate-password": "^1.7.1",
     "generate-password-browser": "^1.1.0",
+    "tailwindcss": "^4.0.8",
     "vue": "^3.5.13"
   },
   "devDependencies": {
