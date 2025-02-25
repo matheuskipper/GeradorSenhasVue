@@ -4,7 +4,7 @@
 import generator from "generate-password-browser";
 
 let password = generator.generate({
-  length: 10,
+  length: 12,
   numbers: true,
 });
 
