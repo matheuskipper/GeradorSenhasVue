@@ -2,7 +2,7 @@
   <div
     class="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4"
   >
-    <h1 class="font-bold text-[35px] p-4">Generate Password</h1>
+    <h1 class="font-bold font-mono text-[35px] p-4">Generate Password</h1>
     <div
       class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg text-gray-900"
     >
@@ -12,14 +12,16 @@
         >
         <input
           type="range"
-          min="8"
+          min="6"
           max="20"
           v-model="length"
           class="w-full mt-2 cursor-pointer"
         />
       </div>
       <div class="flex flex-col gap-4 mb-6">
-        <label class="cursor-pointer flex items-center" for="input-uppercase"
+        <label
+          class="cursor-pointer flex items-center font-semibold"
+          for="input-uppercase"
           ><input
             id="input-uppercase"
             class="cursor-pointer mr-2 w-6 h-6"
@@ -27,7 +29,9 @@
             v-model="includeUppercase"
           />Include uppercase</label
         >
-        <label class="cursor-pointer flex items-center" for="input-numbers"
+        <label
+          class="cursor-pointer flex items-center font-semibold"
+          for="input-numbers"
           ><input
             id="input-numbers"
             class="cursor-pointer mr-2 w-6 h-6"
@@ -35,7 +39,9 @@
             v-model="includeNumbers"
           />Include numbers</label
         >
-        <label class="cursor-pointer flex items-center" for="input-symbols"
+        <label
+          class="cursor-pointer flex items-center font-semibold"
+          for="input-symbols"
           ><input
             id="input-symbols"
             class="cursor-pointer mr-2 w-6 h-6"
@@ -81,11 +87,13 @@
 
 <script>
 import generator from "generate-password-browser";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export default {
   data() {
     return {
-      length: 8,
+      length: 6,
       includeUppercase: false,
       includeNumbers: false,
       includeSymbols: false,
@@ -104,7 +112,19 @@ export default {
       });
     },
     copyPassword() {
-      navigator.clipboard.writeText(this.password);
+      navigator.clipboard.writeText(this.password).then(() => {
+        Toastify({
+          text: "Copied to clipboard!",
+          duration: 2000,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          style: {
+            background: "#7cb055",
+            borderRadius: "8px",
+          },
+        }).showToast();
+      });
     },
   },
 };
